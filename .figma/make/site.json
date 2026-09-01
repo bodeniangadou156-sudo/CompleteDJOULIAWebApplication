@@ -1,0 +1,10 @@
+{
+  "description": "Connect with verified service providers in Mali through a modern marketplace, enabling clients to discover, negotiate, and manage services seamlessly.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

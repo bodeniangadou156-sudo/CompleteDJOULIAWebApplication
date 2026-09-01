@@ -1,0 +1,845 @@
+import type {
+  Provider,
+  Service,
+  Order,
+  Conversation,
+  Post,
+  Category,
+  Notification,
+} from "../types";
+
+export const PROVIDERS: Provider[] = [
+  {
+    id: "prov1",
+    name: "Aminata Kouyaté",
+    profession: "Maquilleuse professionnelle",
+    category: "Beauté & Bien-être",
+    subcategory: "Maquillage",
+    location: "Badalabougou, Bamako",
+    neighborhood: "Badalabougou",
+    city: "Bamako",
+    rating: 4.9,
+    reviewCount: 127,
+    startingPrice: 15000,
+    bio: "Maquilleuse professionnelle avec 8 ans d'expérience. Spécialisée dans le maquillage de mariées, soirées et événements. Je me déplace à domicile ou vous recevez dans mon studio à Badalabougou. Formations certifiées en France et au Sénégal.",
+    avatar:
+      "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 8,
+    skills: ["Maquillage mariée", "Maquillage soirée", "Maquillage naturel", "Contouring", "Make-up artistique"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 76 23 45 67",
+    socialLinks: {
+      instagram: "@aminata_beauty_bko",
+      facebook: "AminataBeautyBamako",
+      whatsapp: "+22376234567",
+    },
+    joinedDate: "2022-03-15",
+    completedOrders: 312,
+    gallery: [
+      "https://images.unsplash.com/photo-1613876215075-276fd62c89a4?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1618803208984-d8ce17b9093d?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1618803210382-99dbc64f10e1?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1560869713-7d0a29430803?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov2",
+    name: "Ibrahim Coulibaly",
+    profession: "Développeur Web & Mobile",
+    category: "Informatique & Digital",
+    subcategory: "Développement",
+    location: "ACI 2000, Bamako",
+    neighborhood: "ACI 2000",
+    city: "Bamako",
+    rating: 4.8,
+    reviewCount: 89,
+    startingPrice: 75000,
+    bio: "Développeur full-stack avec 6 ans d'expérience. Création de sites web, applications mobiles et solutions digitales pour les entreprises maliennes. Portfolio disponible sur demande. Satisfaction garantie ou remboursé.",
+    avatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 6,
+    skills: ["React", "Node.js", "Flutter", "Next.js", "PostgreSQL", "UI/UX"],
+    languages: ["Bambara", "Français", "Anglais"],
+    phone: "+223 65 34 56 78",
+    socialLinks: {
+      instagram: "@ibrahim_dev_mali",
+      whatsapp: "+22365345678",
+    },
+    joinedDate: "2022-09-01",
+    completedOrders: 78,
+    gallery: [
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov3",
+    name: "Fatoumata Traoré",
+    profession: "Coiffeuse & Styliste",
+    category: "Beauté & Bien-être",
+    subcategory: "Coiffure",
+    location: "Hippodrome, Bamako",
+    neighborhood: "Hippodrome",
+    city: "Bamako",
+    rating: 4.7,
+    reviewCount: 203,
+    startingPrice: 5000,
+    bio: "Coiffeuse spécialisée en tresses africaines, nattes, locks et soins naturels. Mon salon est situé à l'Hippodrome. Je propose aussi des services à domicile pour les occasions spéciales.",
+    avatar:
+      "https://images.unsplash.com/photo-1618803210491-008ee18f7bab?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 12,
+    skills: ["Tresses africaines", "Nattes", "Locks", "Soins naturels", "Coloration"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 79 45 67 89",
+    socialLinks: {
+      instagram: "@fato_coiff_bko",
+      whatsapp: "+22379456789",
+    },
+    joinedDate: "2021-11-20",
+    completedOrders: 489,
+    gallery: [
+      "https://images.unsplash.com/photo-1595475884562-073c30d45670?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov4",
+    name: "Oumar Diallo",
+    profession: "Photographe & Vidéaste",
+    category: "Photographie & Vidéo",
+    subcategory: "Photographie événementielle",
+    location: "Magnambougou, Bamako",
+    neighborhood: "Magnambougou",
+    city: "Bamako",
+    rating: 4.9,
+    reviewCount: 156,
+    startingPrice: 20000,
+    bio: "Photographe professionnel depuis 10 ans. Spécialisé dans les mariages, baptêmes, anniversaires et photos corporate. Équipement professionnel Sony. Livraison des photos retouchées en 48h.",
+    avatar:
+      "https://images.unsplash.com/photo-1521443331827-88ee11ea2706?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 10,
+    skills: ["Photographie mariage", "Reportage événement", "Portrait", "Vidéo", "Retouche photo"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 66 56 78 90",
+    socialLinks: {
+      instagram: "@oumar_photo_mali",
+      facebook: "OumarPhotoMali",
+      whatsapp: "+22366567890",
+    },
+    joinedDate: "2021-06-10",
+    completedOrders: 234,
+    gallery: [
+      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov5",
+    name: "Mariam Sanogo",
+    profession: "Couturière & Styliste",
+    category: "Mode & Couture",
+    subcategory: "Couture sur mesure",
+    location: "Kalaban Coura, Bamako",
+    neighborhood: "Kalaban Coura",
+    city: "Bamako",
+    rating: 4.8,
+    reviewCount: 178,
+    startingPrice: 10000,
+    bio: "Couturière depuis 15 ans avec une passion pour la mode africaine contemporaine. Création de tenues sur mesure : boubous, robes de soirée, tenues de mariage, costumes. Tissus locaux et importés disponibles.",
+    avatar:
+      "https://images.unsplash.com/photo-1773398968025-2c1879b8c62b?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 15,
+    skills: ["Couture africaine", "Robes de soirée", "Tenues de mariage", "Retouche", "Broderie"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 75 67 89 01",
+    socialLinks: {
+      instagram: "@mariam_mode_mali",
+      whatsapp: "+22375678901",
+    },
+    joinedDate: "2021-04-05",
+    completedOrders: 387,
+    gallery: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov6",
+    name: "Moussa Keïta",
+    profession: "Électricien Certifié",
+    category: "Maison & Réparation",
+    subcategory: "Électricité",
+    location: "Hamdallaye, Bamako",
+    neighborhood: "Hamdallaye",
+    city: "Bamako",
+    rating: 4.6,
+    reviewCount: 94,
+    startingPrice: 10000,
+    bio: "Électricien certifié avec 7 ans d'expérience dans l'installation et la réparation électrique. Interventions rapides pour particuliers et entreprises. Devis gratuit, travail garanti.",
+    avatar:
+      "https://images.unsplash.com/photo-1661173641095-4eb0a4b0911e?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 7,
+    skills: ["Installation électrique", "Dépannage", "Climatisation", "Groupe électrogène", "Câblage réseau"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 64 78 90 12",
+    socialLinks: {
+      whatsapp: "+22364789012",
+    },
+    joinedDate: "2022-07-22",
+    completedOrders: 156,
+    gallery: [
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov7",
+    name: "Kadiatou Diakité",
+    profession: "Prothésiste Ongulaire",
+    category: "Beauté & Bien-être",
+    subcategory: "Ongles",
+    location: "Badalabougou, Bamako",
+    neighborhood: "Badalabougou",
+    city: "Bamako",
+    rating: 4.9,
+    reviewCount: 211,
+    startingPrice: 8000,
+    bio: "Prothésiste ongulaire professionnelle. Pose d'ongles gel, acrylique, semi-permanent, nail art. Studio à Badalabougou ou déplacement à domicile. Produits professionnels importés, hygiène irréprochable.",
+    avatar:
+      "https://images.unsplash.com/photo-1686628269082-c92c3189903f?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 5,
+    skills: ["Ongles gel", "Ongles acrylique", "Semi-permanent", "Nail art", "French manucure"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 77 89 01 23",
+    socialLinks: {
+      instagram: "@kadia_nails_bko",
+      whatsapp: "+22377890123",
+    },
+    joinedDate: "2023-01-10",
+    completedOrders: 267,
+    gallery: [
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1604902396830-aca29e19b067?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1604906002938-0b8fecf33ca5?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+  {
+    id: "prov8",
+    name: "Bakary Touré",
+    profession: "Organisateur d'événements",
+    category: "Événementiel",
+    subcategory: "Mariages & Cérémonies",
+    location: "Quinzambougou, Bamako",
+    neighborhood: "Quinzambougou",
+    city: "Bamako",
+    rating: 4.7,
+    reviewCount: 62,
+    startingPrice: 150000,
+    bio: "Organisateur professionnel d'événements depuis 9 ans. Mariages, baptêmes, anniversaires, événements corporate. Service clé en main : décoration, traiteur, animation, photo/vidéo. Référence au Mali.",
+    avatar:
+      "https://images.unsplash.com/photo-1659904577828-85836db5a45f?w=200&h=200&fit=crop&auto=format",
+    coverPhoto:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=300&fit=crop&auto=format",
+    verified: true,
+    experience: 9,
+    skills: ["Mariage", "Baptême", "Décoration florale", "Coordination", "Traiteur"],
+    languages: ["Bambara", "Français"],
+    phone: "+223 63 90 12 34",
+    socialLinks: {
+      instagram: "@bakary_events_mali",
+      facebook: "BakaryEventsMali",
+      whatsapp: "+22363901234",
+    },
+    joinedDate: "2021-12-01",
+    completedOrders: 89,
+    gallery: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=400&h=400&fit=crop&auto=format",
+    ],
+  },
+];
+
+export const SERVICES: Service[] = [
+  {
+    id: "svc1",
+    providerId: "prov1",
+    providerName: "Aminata Kouyaté",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Maquillage de mariée",
+    description:
+      "Maquillage complet pour la mariée incluant préparation de la peau, fond de teint longue durée, yeux et lèvres. Essai gratuit inclus. Je me déplace à votre domicile ou vous venez dans mon studio.",
+    price: 35000,
+    pricingType: "fixed",
+    duration: "2-3 heures",
+    category: "Beauté & Bien-être",
+    image:
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop&auto=format",
+    location: "Badalabougou, Bamako",
+    rating: 4.9,
+    reviewCount: 89,
+    available: true,
+  },
+  {
+    id: "svc2",
+    providerId: "prov1",
+    providerName: "Aminata Kouyaté",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Maquillage soirée",
+    description:
+      "Look glamour et longue durée pour vos soirées et événements. Choix du style avec le client.",
+    price: 20000,
+    pricingType: "starting_from",
+    duration: "1-2 heures",
+    category: "Beauté & Bien-être",
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=400&fit=crop&auto=format",
+    location: "Badalabougou, Bamako",
+    rating: 4.8,
+    reviewCount: 67,
+    available: true,
+  },
+  {
+    id: "svc3",
+    providerId: "prov2",
+    providerName: "Ibrahim Coulibaly",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Site web vitrine",
+    description:
+      "Création d'un site web professionnel pour votre entreprise. Design moderne, responsive, optimisé SEO. Livraison en 2 semaines. Hébergement 1 an inclus.",
+    price: 150000,
+    pricingType: "starting_from",
+    duration: "2 semaines",
+    category: "Informatique & Digital",
+    image:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop&auto=format",
+    location: "ACI 2000, Bamako",
+    rating: 4.8,
+    reviewCount: 45,
+    available: true,
+  },
+  {
+    id: "svc4",
+    providerId: "prov3",
+    providerName: "Fatoumata Traoré",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1618803210491-008ee18f7bab?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Tresses africaines",
+    description:
+      "Tresses africaines de toutes sortes : box braids, knotless, fulani, cornrows. Durée variable selon le modèle. Produits naturels utilisés.",
+    price: 15000,
+    pricingType: "starting_from",
+    duration: "3-6 heures",
+    category: "Beauté & Bien-être",
+    image:
+      "https://images.unsplash.com/photo-1595475884562-073c30d45670?w=600&h=400&fit=crop&auto=format",
+    location: "Hippodrome, Bamako",
+    rating: 4.7,
+    reviewCount: 134,
+    available: true,
+  },
+  {
+    id: "svc5",
+    providerId: "prov4",
+    providerName: "Oumar Diallo",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1521443331827-88ee11ea2706?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Reportage photo mariage",
+    description:
+      "Couverture complète de votre mariage de la cérémonie à la réception. 500+ photos retouchées, livraison en 48h, album numérique inclus.",
+    price: 150000,
+    pricingType: "starting_from",
+    duration: "Journée entière",
+    category: "Photographie & Vidéo",
+    image:
+      "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=600&h=400&fit=crop&auto=format",
+    location: "Magnambougou, Bamako",
+    rating: 4.9,
+    reviewCount: 78,
+    available: true,
+  },
+  {
+    id: "svc6",
+    providerId: "prov5",
+    providerName: "Mariam Sanogo",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1773398968025-2c1879b8c62b?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Robe de soirée sur mesure",
+    description:
+      "Création unique de robes de soirée taillées sur mesure. Choix du tissu, design personnalisé. Essayages inclus. Délai : 1-2 semaines.",
+    price: 25000,
+    pricingType: "starting_from",
+    duration: "1-2 semaines",
+    category: "Mode & Couture",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&auto=format",
+    location: "Kalaban Coura, Bamako",
+    rating: 4.8,
+    reviewCount: 112,
+    available: true,
+  },
+  {
+    id: "svc7",
+    providerId: "prov7",
+    providerName: "Kadiatou Diakité",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1686628269082-c92c3189903f?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Pose ongles gel",
+    description:
+      "Pose d'ongles gel avec ou sans nail art. Durée 3-4 semaines. Remplissage disponible. Produits professionnels hypoallergéniques.",
+    price: 12000,
+    pricingType: "starting_from",
+    duration: "1h30",
+    category: "Beauté & Bien-être",
+    image:
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&auto=format",
+    location: "Badalabougou, Bamako",
+    rating: 4.9,
+    reviewCount: 156,
+    available: true,
+  },
+  {
+    id: "svc8",
+    providerId: "prov8",
+    providerName: "Bakary Touré",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1659904577828-85836db5a45f?w=200&h=200&fit=crop&auto=format",
+    providerVerified: true,
+    name: "Organisation de mariage clé en main",
+    description:
+      "Service complet d'organisation de mariage : lieu, décoration, traiteur, animation, photo/vidéo, coordination le jour J. Jusqu'à 500 personnes.",
+    price: 500000,
+    pricingType: "starting_from",
+    duration: "1-3 mois",
+    category: "Événementiel",
+    image:
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=400&fit=crop&auto=format",
+    location: "Quinzambougou, Bamako",
+    rating: 4.7,
+    reviewCount: 38,
+    available: true,
+  },
+];
+
+export const ORDERS: Order[] = [
+  {
+    id: "ord1",
+    serviceId: "svc2",
+    serviceName: "Maquillage soirée",
+    serviceImage:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop&auto=format",
+    clientId: "client1",
+    clientName: "Aïssata Keïta",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1618803208272-872fb4b0b6cd?w=100&h=100&fit=crop&auto=format",
+    providerId: "prov1",
+    providerName: "Aminata Kouyaté",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=100&h=100&fit=crop&auto=format",
+    providerVerified: true,
+    description: "Maquillage pour la soirée de gala du 15 septembre. Look glamour et sophistiqué.",
+    originalPrice: 20000,
+    finalPrice: 20000,
+    status: "en_cours",
+    createdAt: "2026-08-28",
+    scheduledDate: "2026-09-15",
+    location: "Hôtel Azalaï, Bamako",
+    category: "Beauté & Bien-être",
+    timeline: [
+      { status: "Demande envoyée", date: "28 août", description: "Demande créée par le client", completed: true },
+      { status: "Acceptée", date: "28 août", description: "La prestataire a accepté la demande", completed: true },
+      { status: "Confirmée", date: "29 août", description: "Commande confirmée", completed: true },
+      { status: "En cours", date: "Aujourd'hui", description: "Service en cours d'exécution", completed: true, active: true },
+      { status: "Terminée", date: "—", description: "Service terminé", completed: false },
+    ],
+  },
+  {
+    id: "ord2",
+    serviceId: "svc3",
+    serviceName: "Site web vitrine",
+    serviceImage:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=200&h=200&fit=crop&auto=format",
+    clientId: "client1",
+    clientName: "Aïssata Keïta",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1618803208272-872fb4b0b6cd?w=100&h=100&fit=crop&auto=format",
+    providerId: "prov2",
+    providerName: "Ibrahim Coulibaly",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?w=100&h=100&fit=crop&auto=format",
+    providerVerified: true,
+    description: "Site vitrine pour mon agence de communication. 5 pages, formulaire de contact, galerie.",
+    originalPrice: 180000,
+    negotiatedPrice: 150000,
+    finalPrice: 150000,
+    status: "acceptee",
+    createdAt: "2026-08-25",
+    scheduledDate: "2026-09-10",
+    location: "À distance",
+    category: "Informatique & Digital",
+    timeline: [
+      { status: "Demande envoyée", date: "25 août", description: "Demande créée", completed: true },
+      { status: "Négociation", date: "26 août", description: "Proposition à 150 000 FCFA acceptée", completed: true },
+      { status: "Acceptée", date: "27 août", description: "Prestataire a accepté", completed: true, active: true },
+      { status: "En cours", date: "—", description: "Développement en cours", completed: false },
+      { status: "Terminée", date: "—", description: "", completed: false },
+    ],
+  },
+  {
+    id: "ord3",
+    serviceId: "svc4",
+    serviceName: "Tresses africaines",
+    serviceImage:
+      "https://images.unsplash.com/photo-1595475884562-073c30d45670?w=200&h=200&fit=crop&auto=format",
+    clientId: "client1",
+    clientName: "Aïssata Keïta",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1618803208272-872fb4b0b6cd?w=100&h=100&fit=crop&auto=format",
+    providerId: "prov3",
+    providerName: "Fatoumata Traoré",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1618803210491-008ee18f7bab?w=100&h=100&fit=crop&auto=format",
+    providerVerified: true,
+    description: "Box braids longues, couleur naturelle.",
+    originalPrice: 25000,
+    finalPrice: 25000,
+    status: "terminee",
+    createdAt: "2026-08-10",
+    scheduledDate: "2026-08-15",
+    location: "Hippodrome, Bamako",
+    category: "Beauté & Bien-être",
+    timeline: [
+      { status: "Demande envoyée", date: "10 août", description: "", completed: true },
+      { status: "Acceptée", date: "10 août", description: "", completed: true },
+      { status: "Confirmée", date: "11 août", description: "", completed: true },
+      { status: "En cours", date: "15 août", description: "", completed: true },
+      { status: "Terminée", date: "15 août", description: "Service réalisé avec succès", completed: true },
+    ],
+  },
+  {
+    id: "ord4",
+    serviceId: "svc7",
+    serviceName: "Pose ongles gel",
+    serviceImage:
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=200&h=200&fit=crop&auto=format",
+    clientId: "client1",
+    clientName: "Aïssata Keïta",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1618803208272-872fb4b0b6cd?w=100&h=100&fit=crop&auto=format",
+    providerId: "prov7",
+    providerName: "Kadiatou Diakité",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1686628269082-c92c3189903f?w=100&h=100&fit=crop&auto=format",
+    providerVerified: true,
+    description: "Ongles gel avec nail art floral.",
+    originalPrice: 15000,
+    negotiatedPrice: 12000,
+    finalPrice: 12000,
+    status: "en_negociation",
+    createdAt: "2026-09-01",
+    location: "Badalabougou, Bamako",
+    category: "Beauté & Bien-être",
+    timeline: [
+      { status: "Demande envoyée", date: "1er sept", description: "", completed: true },
+      { status: "En négociation", date: "1er sept", description: "Contre-proposition à 12 000 FCFA", completed: true, active: true },
+      { status: "Acceptée", date: "—", description: "", completed: false },
+      { status: "En cours", date: "—", description: "", completed: false },
+      { status: "Terminée", date: "—", description: "", completed: false },
+    ],
+  },
+];
+
+export const CONVERSATIONS: Conversation[] = [
+  {
+    id: "conv1",
+    otherUserId: "prov1",
+    otherUserName: "Aminata Kouyaté",
+    otherUserAvatar:
+      "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=100&h=100&fit=crop&auto=format",
+    otherUserVerified: true,
+    otherUserProfession: "Maquilleuse professionnelle",
+    lastMessage: "Parfait ! Je serai là à 14h. N'oubliez pas d'avoir le visage propre.",
+    lastMessageTime: "14:32",
+    unreadCount: 0,
+    online: true,
+    messages: [
+      { id: "m1", senderId: "client1", content: "Bonjour Aminata, je voudrais réserver un maquillage pour le 15 septembre.", type: "text", timestamp: "10:15", read: true },
+      { id: "m2", senderId: "prov1", content: "Bonjour ! Bien sûr, pour quelle occasion ?", type: "text", timestamp: "10:23", read: true },
+      { id: "m3", senderId: "client1", content: "Un gala de soirée à l'Hôtel Azalaï. Je voudrais un look glamour.", type: "text", timestamp: "10:25", read: true },
+      { id: "m4", senderId: "prov1", content: "Très bien ! J'ai de la disponibilité ce jour-là. Mon tarif pour un maquillage soirée est à partir de 20 000 FCFA. Ça vous convient ?", type: "text", timestamp: "10:30", read: true },
+      { id: "m5", senderId: "client1", content: "Oui c'est parfait ! On peut se retrouver à quelle heure ?", type: "text", timestamp: "14:00", read: true },
+      { id: "m6", senderId: "prov1", content: "Parfait ! Je serai là à 14h. N'oubliez pas d'avoir le visage propre.", type: "text", timestamp: "14:32", read: true },
+    ],
+  },
+  {
+    id: "conv2",
+    otherUserId: "prov2",
+    otherUserName: "Ibrahim Coulibaly",
+    otherUserAvatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?w=100&h=100&fit=crop&auto=format",
+    otherUserVerified: true,
+    otherUserProfession: "Développeur Web & Mobile",
+    lastMessage: "J'ai commencé la maquette du site. Je vous envoie ça demain.",
+    lastMessageTime: "Hier",
+    unreadCount: 2,
+    online: false,
+    messages: [
+      { id: "m1", senderId: "prov2", content: "Bonjour ! J'ai bien reçu votre commande pour le site web vitrine.", type: "text", timestamp: "09:00", read: true },
+      { id: "m2", senderId: "client1", content: "Bonjour Ibrahim, super ! Quand pouvez-vous commencer ?", type: "text", timestamp: "09:15", read: true },
+      { id: "m3", senderId: "prov2", content: "Je commence aujourd'hui. Pouvez-vous m'envoyer votre logo et les informations de votre entreprise ?", type: "text", timestamp: "09:20", read: true },
+      { id: "m4", senderId: "prov2", content: "J'ai commencé la maquette du site. Je vous envoie ça demain.", type: "text", timestamp: "17:45", read: false },
+    ],
+  },
+  {
+    id: "conv3",
+    otherUserId: "prov3",
+    otherUserName: "Fatoumata Traoré",
+    otherUserAvatar:
+      "https://images.unsplash.com/photo-1618803210491-008ee18f7bab?w=100&h=100&fit=crop&auto=format",
+    otherUserVerified: true,
+    otherUserProfession: "Coiffeuse & Styliste",
+    lastMessage: "Merci pour votre confiance ! À bientôt 😊",
+    lastMessageTime: "Lun",
+    unreadCount: 0,
+    online: false,
+    messages: [
+      { id: "m1", senderId: "prov3", content: "Bonjour ! Votre service de tresses africaines est terminé. Comment avez-vous trouvé ?", type: "text", timestamp: "16:00", read: true },
+      { id: "m2", senderId: "client1", content: "C'était excellent ! Je suis très satisfaite. Je reviendrai bientôt.", type: "text", timestamp: "16:30", read: true },
+      { id: "m3", senderId: "prov3", content: "Merci pour votre confiance ! À bientôt 😊", type: "text", timestamp: "16:35", read: true },
+    ],
+  },
+  {
+    id: "conv4",
+    otherUserId: "prov4",
+    otherUserName: "Oumar Diallo",
+    otherUserAvatar:
+      "https://images.unsplash.com/photo-1521443331827-88ee11ea2706?w=100&h=100&fit=crop&auto=format",
+    otherUserVerified: true,
+    otherUserProfession: "Photographe & Vidéaste",
+    lastMessage: "Voici quelques exemples de mon travail pour les portraits.",
+    lastMessageTime: "08:20",
+    unreadCount: 1,
+    online: true,
+    messages: [
+      { id: "m1", senderId: "prov4", content: "Bonjour ! J'ai vu votre demande pour un shooting portrait.", type: "text", timestamp: "08:00", read: true },
+      { id: "m2", senderId: "prov4", content: "Voici quelques exemples de mon travail pour les portraits.", type: "text", timestamp: "08:20", read: false },
+    ],
+  },
+];
+
+export const POSTS: Post[] = [
+  {
+    id: "post1",
+    providerId: "prov1",
+    providerName: "Aminata Kouyaté",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=100&h=100&fit=crop&auto=format",
+    providerProfession: "Maquilleuse professionnelle",
+    providerVerified: true,
+    content:
+      "✨ Regardez ce look que j'ai réalisé pour la mariée de ce weekend ! Un maquillage naturel et lumineux pour sublimer sa beauté. Merci à elle pour sa confiance ❤️\n\n#maquillage #mariee #bamako #beaute #djoulia",
+    images: [
+      "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=400&fit=crop&auto=format",
+    ],
+    likes: 234,
+    comments: 28,
+    shares: 12,
+    liked: false,
+    timestamp: "Il y a 2 heures",
+  },
+  {
+    id: "post2",
+    providerId: "prov4",
+    providerName: "Oumar Diallo",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1521443331827-88ee11ea2706?w=100&h=100&fit=crop&auto=format",
+    providerProfession: "Photographe & Vidéaste",
+    providerVerified: true,
+    content:
+      "📸 Voici quelques shots de la soirée Gala d'hier à Bamako. Une atmosphère électrique et des moments inoubliables. Merci à tous les invités et à l'équipe organisatrice !\n\n#photographie #evenement #bamako #gala",
+    images: [
+      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=600&h=400&fit=crop&auto=format",
+    ],
+    likes: 189,
+    comments: 34,
+    shares: 45,
+    liked: true,
+    timestamp: "Il y a 5 heures",
+  },
+  {
+    id: "post3",
+    providerId: "prov5",
+    providerName: "Mariam Sanogo",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1773398968025-2c1879b8c62b?w=100&h=100&fit=crop&auto=format",
+    providerProfession: "Couturière & Styliste",
+    providerVerified: true,
+    content:
+      "🪡 Nouvelle création ! Cette robe de soirée en tissu bazin riche pour une cliente spéciale. Chaque point est fait avec amour et précision. Sur mesure uniquement !\n\n#couture #mode #bazin #bamako #surlesure",
+    images: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop&auto=format",
+    ],
+    likes: 312,
+    comments: 41,
+    shares: 28,
+    liked: false,
+    timestamp: "Il y a 1 jour",
+  },
+  {
+    id: "post4",
+    providerId: "prov2",
+    providerName: "Ibrahim Coulibaly",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?w=100&h=100&fit=crop&auto=format",
+    providerProfession: "Développeur Web & Mobile",
+    providerVerified: true,
+    content:
+      "🚀 Fier de présenter le nouveau site web que j'ai réalisé pour une entreprise locale de Bamako ! Interface moderne, rapide, et optimisée pour mobile. Si vous cherchez un développeur pour votre projet, n'hésitez pas à me contacter.\n\n#developpement #web #bamako #digital #mali",
+    images: [
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop&auto=format",
+    ],
+    likes: 145,
+    comments: 22,
+    shares: 19,
+    liked: false,
+    timestamp: "Il y a 2 jours",
+  },
+  {
+    id: "post5",
+    providerId: "prov8",
+    providerName: "Bakary Touré",
+    providerAvatar:
+      "https://images.unsplash.com/photo-1659904577828-85836db5a45f?w=100&h=100&fit=crop&auto=format",
+    providerProfession: "Organisateur d'événements",
+    providerVerified: true,
+    content:
+      "🎊 Mariage de rêve hier ! Décoration florale, ambiance lumineuse, 350 invités comblés. C'est pour ça que j'aime ce métier. Chaque mariage est une histoire unique que j'ai l'honneur de raconter.\n\n#mariage #evenement #decoration #bamako #wedding",
+    images: [
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop&auto=format",
+    ],
+    likes: 567,
+    comments: 89,
+    shares: 134,
+    liked: true,
+    timestamp: "Il y a 3 jours",
+  },
+];
+
+export const CATEGORIES: Category[] = [
+  { id: "cat1", name: "Beauté & Bien-être", icon: "✨", count: 234, bgColor: "bg-pink-50", textColor: "text-pink-600" },
+  { id: "cat2", name: "Mode & Couture", icon: "👗", count: 89, bgColor: "bg-purple-50", textColor: "text-purple-600" },
+  { id: "cat3", name: "Maison & Réparation", icon: "🔧", count: 156, bgColor: "bg-blue-50", textColor: "text-blue-600" },
+  { id: "cat4", name: "Informatique & Digital", icon: "💻", count: 112, bgColor: "bg-cyan-50", textColor: "text-cyan-600" },
+  { id: "cat5", name: "Photographie & Vidéo", icon: "📸", count: 78, bgColor: "bg-yellow-50", textColor: "text-yellow-600" },
+  { id: "cat6", name: "Événementiel", icon: "🎉", count: 45, bgColor: "bg-orange-50", textColor: "text-orange-600" },
+  { id: "cat7", name: "Transport", icon: "🚗", count: 67, bgColor: "bg-green-50", textColor: "text-green-600" },
+  { id: "cat8", name: "Éducation & Formation", icon: "📚", count: 93, bgColor: "bg-indigo-50", textColor: "text-indigo-600" },
+  { id: "cat9", name: "Commerce", icon: "🏪", count: 134, bgColor: "bg-teal-50", textColor: "text-teal-600" },
+  { id: "cat10", name: "Services professionnels", icon: "💼", count: 201, bgColor: "bg-slate-50", textColor: "text-slate-600" },
+  { id: "cat11", name: "Autres", icon: "🔍", count: 312, bgColor: "bg-zinc-50", textColor: "text-zinc-600" },
+];
+
+export const NOTIFICATIONS: Notification[] = [
+  {
+    id: "notif1",
+    type: "message",
+    title: "Ibrahim Coulibaly",
+    body: "J'ai commencé la maquette du site. Je vous envoie ça demain.",
+    timestamp: "Il y a 30 min",
+    read: false,
+    avatar: "https://images.unsplash.com/photo-1614023342667-6f060e9d1e04?w=60&h=60&fit=crop&auto=format",
+  },
+  {
+    id: "notif2",
+    type: "accepted",
+    title: "Commande acceptée",
+    body: "Aminata Kouyaté a accepté votre demande de maquillage soirée.",
+    timestamp: "Il y a 2 h",
+    read: false,
+    avatar: "https://images.unsplash.com/photo-1773399025073-d2172448d13e?w=60&h=60&fit=crop&auto=format",
+  },
+  {
+    id: "notif3",
+    type: "order",
+    title: "Commande en cours",
+    body: "Votre commande #ORD-001 est maintenant en cours de réalisation.",
+    timestamp: "Hier",
+    read: true,
+  },
+  {
+    id: "notif4",
+    type: "request",
+    title: "Oumar Diallo",
+    body: "Vous avez envoyé une demande pour un reportage photo.",
+    timestamp: "Il y a 2 jours",
+    read: true,
+    avatar: "https://images.unsplash.com/photo-1521443331827-88ee11ea2706?w=60&h=60&fit=crop&auto=format",
+  },
+  {
+    id: "notif5",
+    type: "verification",
+    title: "Vérification approuvée",
+    body: "Votre profil a été vérifié avec succès. Vous êtes maintenant un prestataire certifié.",
+    timestamp: "Il y a 5 jours",
+    read: true,
+  },
+];
+
+export function formatPrice(amount: number): string {
+  return new Intl.NumberFormat("fr-FR").format(amount) + " FCFA";
+}
+
+export function getProviderById(id: string): Provider | undefined {
+  return PROVIDERS.find((p) => p.id === id);
+}
+
+export function getServiceById(id: string): Service | undefined {
+  return SERVICES.find((s) => s.id === id);
+}
+
+export function getServicesByProvider(providerId: string): Service[] {
+  return SERVICES.filter((s) => s.providerId === providerId);
+}
